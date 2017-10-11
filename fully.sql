@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-10-10 17:27:32
+Date: 2017-10-11 17:25:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -247,7 +247,7 @@ CREATE TABLE `menus` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `lang` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of menus
@@ -269,8 +269,14 @@ INSERT INTO `menus` VALUES ('14', 'Videos', '/en/video', '14', '0', 'module', 'v
 INSERT INTO `menus` VALUES ('15', 'Faq', '/en/faq', '15', '0', 'module', 'faq', '1', '2017-10-09 02:04:06', '2017-10-09 02:04:06', 'en');
 INSERT INTO `menus` VALUES ('16', 'Contact Us', '/en/contact', '16', '0', 'module', 'contact', '1', '2017-10-09 02:04:06', '2017-10-09 02:04:06', 'en');
 INSERT INTO `menus` VALUES ('17', '网站首页', '/zh/', '1', '0', 'module', 'home', '1', '2017-10-10 01:50:37', '2017-10-10 01:50:37', 'zh');
-INSERT INTO `menus` VALUES ('18', '关于我们', '/zh/', '2', '0', 'module', null, '1', '2017-10-10 09:01:40', '2017-10-10 09:01:40', 'zh');
-INSERT INTO `menus` VALUES ('19', '中心介绍', '/zh/', '3', '18', 'module', null, '1', '2017-10-10 09:02:48', '2017-10-10 09:02:48', 'zh');
+INSERT INTO `menus` VALUES ('18', '关于我们', '/zh/', '2', '0', 'module', null, '1', '2017-10-10 09:01:40', '2017-10-11 07:12:34', 'zh');
+INSERT INTO `menus` VALUES ('19', '中心介绍', '/zh/', '3', '18', 'module', null, '1', '2017-10-10 09:02:48', '2017-10-11 07:12:34', 'zh');
+INSERT INTO `menus` VALUES ('20', '建设规划', '/zh/', '5', '18', 'module', null, '1', '2017-10-11 00:35:17', '2017-10-11 07:12:34', 'zh');
+INSERT INTO `menus` VALUES ('21', '质量体系', '/zh/news', '4', '18', 'module', '', '1', '2017-10-11 00:36:20', '2017-10-11 07:12:34', 'zh');
+INSERT INTO `menus` VALUES ('22', '组织架构', '/zh/', '6', '18', 'module', null, '1', '2017-10-11 03:44:13', '2017-10-11 07:12:34', 'zh');
+INSERT INTO `menus` VALUES ('23', '联系我们', 'http://www.crtcgz.com/', '7', '18', 'custom', null, '1', '2017-10-11 06:53:32', '2017-10-11 07:12:34', 'zh');
+INSERT INTO `menus` VALUES ('24', '大事记', 'http://www.grpm1973.com/crat/qclbj.jpg', '8', '18', 'custom', null, '1', '2017-10-11 06:55:09', '2017-10-11 07:12:34', 'zh');
+INSERT INTO `menus` VALUES ('25', ' 国家质检中心', '/zh/project', '9', '0', 'module', 'project', '1', '2017-10-11 06:57:38', '2017-10-11 07:12:34', 'zh');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -380,7 +386,7 @@ CREATE TABLE `persistences` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `persistences_code_unique` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of persistences
@@ -389,6 +395,8 @@ INSERT INTO `persistences` VALUES ('1', '1', '03ul7avJnlMjJpnSXtqpUnHWWYGIURMD',
 INSERT INTO `persistences` VALUES ('2', '1', 'CDF7lMV2wcEX2fnf776p4gb2pxeETwxg', '2017-10-09 07:11:48', '2017-10-09 07:11:48');
 INSERT INTO `persistences` VALUES ('3', '1', 'kNPJs0rlnvXuVbyeDO5OHjPBcHMG0Gtt', '2017-10-10 00:44:27', '2017-10-10 00:44:27');
 INSERT INTO `persistences` VALUES ('4', '1', 'VG365jNpRSGIs65TElYQa2XlKZdpoavv', '2017-10-10 05:57:05', '2017-10-10 05:57:05');
+INSERT INTO `persistences` VALUES ('5', '1', 'sQvZQ69UtZXrrt3prgvQfglG1oOtjnVI', '2017-10-11 00:32:33', '2017-10-11 00:32:33');
+INSERT INTO `persistences` VALUES ('6', '1', '2CzuXAVWJt2Z8wDsMgEZ9hukDWs4j4fb', '2017-10-11 05:53:16', '2017-10-11 05:53:16');
 
 -- ----------------------------
 -- Table structure for photos
@@ -617,7 +625,7 @@ CREATE TABLE `throttle` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `throttle_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of throttle
@@ -637,6 +645,9 @@ INSERT INTO `throttle` VALUES ('12', '1', 'user', null, '2017-10-10 00:43:57', '
 INSERT INTO `throttle` VALUES ('13', null, 'global', null, '2017-10-10 05:56:37', '2017-10-10 05:56:37');
 INSERT INTO `throttle` VALUES ('14', null, 'ip', '127.0.0.1', '2017-10-10 05:56:37', '2017-10-10 05:56:37');
 INSERT INTO `throttle` VALUES ('15', '1', 'user', null, '2017-10-10 05:56:37', '2017-10-10 05:56:37');
+INSERT INTO `throttle` VALUES ('16', null, 'global', null, '2017-10-11 00:32:24', '2017-10-11 00:32:24');
+INSERT INTO `throttle` VALUES ('17', null, 'ip', '127.0.0.1', '2017-10-11 00:32:24', '2017-10-11 00:32:24');
+INSERT INTO `throttle` VALUES ('18', '1', 'user', null, '2017-10-11 00:32:24', '2017-10-11 00:32:24');
 
 -- ----------------------------
 -- Table structure for users
@@ -659,7 +670,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'd82078010@163.com', '$2y$10$5srLFTIHkosXKiPnXwpZbe2vZRGh9nx.Blg6Lc.gr.nFQNITquP.6', null, '2017-10-10 05:57:05', 'Roc', 'Teng', '2017-10-09 02:04:00', '2017-10-10 05:57:05');
+INSERT INTO `users` VALUES ('1', 'd82078010@163.com', '$2y$10$5srLFTIHkosXKiPnXwpZbe2vZRGh9nx.Blg6Lc.gr.nFQNITquP.6', null, '2017-10-11 05:53:17', 'Roc', 'Teng', '2017-10-09 02:04:00', '2017-10-11 05:53:17');
 INSERT INTO `users` VALUES ('2', 'admin@admin.com', '$2y$10$5f75CIFbVhu1SakpuiuygeowOcyPb3Fd0ZNVNi7f6MiodVX1ri7mS', null, null, 'Super', 'Admin', '2017-10-09 02:04:01', '2017-10-09 02:04:01');
 
 -- ----------------------------

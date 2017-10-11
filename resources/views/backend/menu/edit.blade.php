@@ -21,7 +21,7 @@
 </script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1> Menu <small> | Edit Menu</small> </h1>
+    <h1>  菜单 <small> | 修改菜单</small> </h1>
     <ol class="breadcrumb">
         <li><a href="{!! url(getLang(). '/admin/menu') !!}">Menu</a></li>
         <li class="active">Add Menu Item</li>
@@ -34,7 +34,7 @@
     {!! Form::open( array( 'route' => array(getLang(). '.admin.menu.update', $menu->id), 'method' => 'PATCH')) !!}
     <!-- Title -->
     <div class="control-group {!! $errors->has('title') ? 'has-error' : '' !!}">
-        <label class="control-label" for="title">Title</label>
+        <label class="control-label" for="title">标题</label>
 
         <div class="controls">
             {!! Form::text('title', $menu->title, array('class'=>'form-control', 'id' => 'title', 'placeholder'=>'Title', 'value'=>Input::old('title'))) !!}
@@ -44,9 +44,24 @@
         </div>
         <br>
     </div>
+	
+	<!-- Parent_Id -->
+    <label class="control-label" for="title">父类</label>
+
+    <div class="control-group {!! $errors->has('arrays') ? 'has-error' : '' !!} ">
+      
+        <div class="controls">
+            {!! Form::select('parent_id',$arrays,$menu->parent_id, array('class'=>'form-control',)) !!}
+            @if ($errors->first('arrays'))
+            <span class="help-block">{!! $errors->first('arrays') !!}</span>
+            @endif
+        </div>
+        <br>
+    </div>
+	
 
     <!-- Type -->
-    <label class="control-label" for="title">Type</label>
+    <label class="control-label" for="title">类型</label>
 
     <div class="controls">
         <div class="radio">

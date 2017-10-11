@@ -64,26 +64,48 @@ class MenuController extends Controller
 		 
 		$LangIds = $this->menu->getTheIdFromLang();
 		
+	
+	
 		
-		$parents = $this->menuTransformer->transformCollection($LangIds->toArray());
+		//dd($LangIds->sort());
+		//$parents = $this->menuTransformer->transformCollection($LangIds->toArray());
 		
-		$arrays = [ 0 => '父级' ];
+		//$arrays = [ 0 => '父级' ];
+		
+		
+		$arrays = $this->menu->getMenuInfo($LangIds->sort());
+		
+		
+		//dd($targetItems);
+		
+        return view('backend.menu.create', compact('options','arrays'));
+    }
+	
+	
+	private function tree($parents,$sign){
 		
 		foreach($parents as $parent){
 			
-			$id = strval($parent['id']);
+			
 			$array = [
-			$parent['id'] => $parent['title']
+			$parent['id'] => $sign.$parent['title']
 			];
-			  
+			
+			if($this->menu->hasChildItems($parent['id'])){
+				
+				$cld = $this->menu->getChildItems($parent['id']);
+				$this->menuTransformer->transformCollection($cld->toArray());
+				
+			}
+			
+			
+			
 			$arrays += $array;
 						
 		}
 		
-		
-		
-        return view('backend.menu.create', compact('options','arrays'));
-    }
+}
+	
 
     /**
      * Store a newly created resource in storage.
@@ -94,15 +116,18 @@ class MenuController extends Controller
     {
         $formData = Input::all();
 
+		
+		
         if ($formData['type'] == 'module') {
             $option = $formData['option'];
-            $url = $this->menu->getUrl($option);
+            $this->menu->option = $option;
+			$url = $this->menu->getUrl($option);
             $formData['url'] = $url;
         }
 
         $host = $_SERVER['SERVER_NAME'];
         $urlInfo = parse_url($formData['url']);
-
+		
         $rules = array(
             'title' => 'required',
             'url' => 'required',
@@ -110,6 +135,7 @@ class MenuController extends Controller
 
         $validation = Validator::make($formData, $rules);
 
+		
         if ($validation->fails()) {
             return langRedirectRoute('admin.menu.create')->withErrors($validation)->withInput();
         }
@@ -123,11 +149,13 @@ class MenuController extends Controller
             $url = ($formData['type'] == 'module') ? $formData['url'] : 'http://'.$formData['url'];
         }
 
-		//dd($formData);
+	//	dd($formData);
+	
 		$parent_id = $formData['parent_id']?$formData['parent_id']:0;
-		
+		$type = $formData['type']?$formData['type']:0;
 		
 		$this->menu->parent_id = $parent_id;
+		$this->menu->type = $type;
         $this->menu->lang = getLang();
         $this->menu->url = $url;
         $this->menu->save();
@@ -160,8 +188,17 @@ class MenuController extends Controller
     {
         $options = $this->menu->getMenuOptions();
         $menu = $this->menu->find($id);
+		
 
-        return view('backend.menu.edit', compact('menu', 'options'));
+		
+		
+		$LangIds = $this->menu->getTheIdFromLang();
+		
+		$arrays = $this->menu->getMenuInfo($LangIds->sort());
+		
+	
+
+        return view('backend.menu.edit', compact('menu', 'options','arrays'));
     }
 
     /**
@@ -177,12 +214,15 @@ class MenuController extends Controller
 
         if ($formData['type'] == 'module') {
             $option = $formData['option'];
-            $url = $this->menu->getUrl($option);
+            $this->menu->option = $option;
+			$url = $this->menu->getUrl($option);
             $formData['url'] = $url;
         }
 
         $host = $_SERVER['SERVER_NAME'];
         $urlInfo = parse_url($formData['url']);
+		
+		
 
         $rules = array(
             'title' => 'required',
@@ -204,11 +244,19 @@ class MenuController extends Controller
             $url = ($formData['type'] == 'module') ? $formData['url'] : 'http://'.$formData['url'];
         }
 
+		
+		
+		
         $this->menu->url = $url;
+		$parent_id = $formData['parent_id']?$formData['parent_id']:0;
+		$type = $formData['type']?$formData['type']:0;
+		$this->menu->parent_id = $parent_id;
+		$this->menu->type = $type;
+		
         $this->menu->save();
 
         Flash::message('Menu was successfully updated');
-
+		
         return langRedirectRoute('admin.menu.index');
     }
 

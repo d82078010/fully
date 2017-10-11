@@ -4,6 +4,7 @@ namespace Fully\Models;
 
 use URL;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Fully\Repositories\Page\PageRepository;
 use Fully\Repositories\PhotoGallery\PhotoGalleryRepository;
 
@@ -15,7 +16,7 @@ use Fully\Repositories\PhotoGallery\PhotoGalleryRepository;
 class Menu extends Model
 {
     public $table = 'menus';
-    protected $fillable = ['title', 'url', 'order', 'type', 'selected'];
+    protected $fillable = ['title', 'url', 'order', 'type', 'selected','parent_id'];
 
     public function getMaxOrder()
     {
@@ -106,6 +107,52 @@ class Menu extends Model
 
         return true;
     }
+	
+	/*
+	 *  getchild
+	 */
+    
+	public function getChildItems($parent_id){
+		
+		$child = $this->where('parent_id', $id)->where('lang', getLang())->where('is_published', 1)->get();
+		
+		if(isset($child)){
+			return null;
+		}
+		return $child; 
+		
+	}
+	
+	/*
+	 *
+	 */
+	
+	//使用递归获取分类 （正式函数）
+    public function getMenu($sourceItems, $targetItems, $pid=0, $str='|'){
+		$str .= '--';
+        foreach ($sourceItems as $k => $v) {
+			
+            if($v->parent_id == $pid){
+                $targetItems[$v->id] =  $str.$v->title;
+                $this->getMenu($sourceItems, $targetItems, $v->id, $str);
+            }
+			
+        }
+		
+    }
+	
+	    //测试函数 （测试正式函数）
+    public function getMenuInfo($sourceItems){
+		
+			$targetItems = new Collection;
+			$this->getMenu($sourceItems, $targetItems);
+        
+		return $targetItems;
+    }
+ 
+	
+	
+	
 
     public function getMenuOptions()
     {

@@ -70,6 +70,7 @@
                 <span>Module</span>
             </label>
         </div>
+		
         <div class="radio">
             <label>
                 {!! Form::radio('type', 'custom', false, array('id'=>'custom', 'class'=>'type')) !!}
@@ -84,7 +85,7 @@
         <label class="control-label" for="title">Options</label>
 
         <div class="controls">
-            {!! Form::select('option', $options,null,array('class'=>'form-control',)) !!}
+            {!! Form::select('option', $options, null, array('class'=>'form-control', 'id' => 'options', 'value'=>Input::old('options')))  !!}
             @if ($errors->first('options'))
             <span class="help-block">{!! $errors->first('options') !!}</span>
             @endif
