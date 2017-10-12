@@ -159,6 +159,12 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Sseffa\VideoApi\VideoApiServiceProvider::class,
+		
+		
+		/*
+		 *  U-editor
+		 */
+		 Stevenyangecho\UEditor\UEditorServiceProvider::class,
 
     ],
     /*
@@ -220,7 +226,8 @@ return [
         'VideoApi'            => Sseffa\VideoApi\Facades\VideoApi::class,
         'Feeder'              => Fully\Feeder\Facade\Feeder::class,
         'Search'              => Fully\Search\Facade\Search::class,
-        'Flash'               => Laracasts\Flash\Flash::class
+        'Flash'               => Laracasts\Flash\Flash::class,
+		'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class
 
     ],
 
