@@ -158,6 +158,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('content')
+        @yield('script')
     </div><!-- /.content-wrapper -->
 
     @include('backend/layout/footer')

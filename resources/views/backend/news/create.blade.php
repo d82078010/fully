@@ -58,7 +58,23 @@
                     <span class="help-block">{!! $errors->first('datetime') !!}</span> @endif </div>
         </div>
         <br>
-        <!-- Content -->
+        
+        <!--Content (*U-editor*) -->
+        <div id="ueditor" class="edui-default">
+   			 @include('UEditor::head')
+		</div>
+        @section('script')
+			<script id="ueditor"></script>
+			<script>
+				    var ue=UE.getEditor("ueditor");
+				    ue.ready(function(){
+				         //因为Laravel有防csrf防伪造攻击的处理所以加上此行
+				         ue.execCommand('serverparam','_token','{{ csrf_token() }}');
+				    });
+			</script>
+		@stop
+        
+        <!-- Content 
         <div class="control-group {!! $errors->has('content') ? 'has-error' : '' !!}">
             <label class="control-label" for="title">Content</label>
 
@@ -67,7 +83,7 @@
                 @if ($errors->first('content')) <span class="help-block">{!! $errors->first('content') !!}</span> @endif
             </div>
         </div>
-        <br>
+        <br> -->
         <!-- Image -->
         <div class="fileinput fileinput-new control-group {!! $errors->has('image') ? 'has-error' : '' !!}" data-provides="fileinput">
             <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
