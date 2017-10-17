@@ -76,6 +76,20 @@
             </div>
         </div>
         <br>
+		
+		<!-- Summary -->
+        <div class="control-group {!! $errors->has('summary') ? 'has-error' : '' !!}">
+            <label class="control-label" for="title">摘要</label>
+
+            <div class="controls"> {!! Form::textarea('summary', $news->summary, array('class'=>'form-control', 'id' => 'summary',
+                'placeholder'=>'summary', 'value'=>Input::old('summary'))) !!}
+                @if ($errors->first('summary')) <span class="help-block">{!! $errors->first('summary') !!}</span> @endif
+            </div>
+        </div>
+        <br>
+		
+	
+		
         <!-- Datetime -->
         <div class="control-group {!! $errors->has('datetime') ? 'has-error' : '' !!}">
             <label class="control-label" for="title">Datetime</label>
@@ -86,7 +100,31 @@
                     <span class="help-block">{!! $errors->first('datetime') !!}</span> @endif </div>
         </div>
         <br>
-        <!-- Content -->
+		
+			  <!--Content (*U-editor*) -->
+	  <div class="control-group {!! $errors->has('content') ? 'has-error' : '' !!}">
+     	<label class="control-label" for="title">Content</label>
+    
+		<div class="controls"> 
+			{!! Form::textarea('content', $news->content, array('class'=>'edui-default', 'id' => 'content','placeholder'=>'Content', 'value'=>Input::old('content'))) !!}
+			@include('UEditor::head')
+			@if($errors->first('content')) 
+				<span class="help-block">{!! $errors->first('content') !!}</span> 
+			@endif
+		</div>
+	  </div>
+      <br>
+	  @section('script')
+			<script id="ueditor"></script>
+			<script>
+				    var ue=UE.getEditor("content");
+				    ue.ready(function(){
+				         //因为Laravel有防csrf防伪造攻击的处理所以加上此行
+				         ue.execCommand('serverparam','_token','{{ csrf_token() }}');
+				    });
+			</script>
+		@stop
+        <!-- Content 
         <div class="control-group {!! $errors->has('content') ? 'has-error' : '' !!}">
             <label class="control-label" for="title">Content</label>
 
@@ -95,7 +133,7 @@
                 @if ($errors->first('content')) <span class="help-block">{!! $errors->first('content') !!}</span> @endif
             </div>
         </div>
-        <br>
+        <br>-->
         <!-- Image -->
         <div class="fileinput fileinput-new control-group {!! $errors->has('image') ? 'has-error' : '' !!}" data-provides="fileinput">
             <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
@@ -128,12 +166,13 @@
             <br>
             {!! Form::submit('Save', array('class' => 'btn btn-success')) !!}
             {!! Form::close() !!}
-            <script type="text/javascript">
+          
+<!--		  <script type="text/javascript">
                 window.onload = function () {
                     CKEDITOR.replace('content', {
                         "filebrowserBrowseUrl": "{!! url('filemanager/show') !!}"
                     });
                 };
-            </script>
+            </script> -->
         </div>
 @stop

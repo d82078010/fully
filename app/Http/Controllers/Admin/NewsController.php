@@ -12,6 +12,8 @@ use Fully\Repositories\News\NewsInterface;
 use Fully\Repositories\News\NewsRepository as News;
 use Fully\Exceptions\Validation\ValidationException;
 
+//use JellyBool\Translug\Translug;
+
 /**
  * Class NewsController.
  *
@@ -37,6 +39,7 @@ class NewsController extends Controller
     public function index()
     {
         $pagiData = $this->news->paginate(Input::get('page', 1), $this->perPage, true);
+		
         $news = Pagination::makeLengthAware($pagiData->items, $pagiData->totalItems, $this->perPage);
 
         return view('backend.news.index', compact('news'));
@@ -59,10 +62,13 @@ class NewsController extends Controller
      */
     public function store()
     {
+		
         try {
-            $this->news->create(Input::all());
-            Flash::message('News was successfully added');
 
+		//	translug('如何安装 Laravel'); mark
+			
+			$this->news->create(Input::all());            
+			Flash::message('News was successfully added');			
             return langRedirectRoute('admin.news.index');
         } catch (ValidationException $e) {
             return langRedirectRoute('admin.news.create')->withInput()->withErrors($e->getErrors());
@@ -107,6 +113,7 @@ class NewsController extends Controller
     public function update($id)
     {
         try {
+			//dd(Input::all());
             $this->news->update($id, Input::all());
             Flash::message('News was successfully updated');
 

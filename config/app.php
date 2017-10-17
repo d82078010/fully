@@ -165,6 +165,11 @@ return [
 		 *  U-editor
 		 */
 		 Stevenyangecho\UEditor\UEditorServiceProvider::class,
+		 
+		 /*
+		  * translug
+		  */
+		 JellyBool\Translug\TranslugServiceProvider::class,
 
     ],
     /*
@@ -227,7 +232,8 @@ return [
         'Feeder'              => Fully\Feeder\Facade\Feeder::class,
         'Search'              => Fully\Search\Facade\Search::class,
         'Flash'               => Laracasts\Flash\Flash::class,
-		'UEditor'=>Stevenyangecho\UEditor\UEditorServiceProvider::class
+		'UEditor'             => Stevenyangecho\UEditor\UEditorServiceProvider::class,
+		'Translug'            => JellyBool\Translug\TranslugFacade::class,
 
     ],
 

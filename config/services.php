@@ -34,5 +34,10 @@ return [
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+	
+	// 下面是你添加的内容
+   'youdao' => [
+           'appKey' => env('YOUDAO_APP_KEY'),
+           'appSecret' => env('YOUDAO_APP_SECRET'),
+       ],
 ];

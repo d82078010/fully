@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Fully\Services\Pagination;
 use Fully\Repositories\News\NewsInterface;
 use Fully\Repositories\News\NewsRepository as News;
-
+//use Translug;
 /**
  * Class NewsController.
  *
@@ -39,7 +39,11 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $pagiData = $this->news->paginate($request->get('page', 1), $this->perPage, false);
+		
+		
         $news = Pagination::makeLengthAware($pagiData->items, $pagiData->totalItems, $this->perPage);
+		
+		
 
         return view('frontend.news.index', compact('news'));
     }
@@ -50,8 +54,12 @@ class NewsController extends Controller
      */
     public function show($slug)
     {
-        $news = $this->news->getBySlug($slug);
-
+		
+        //$news = $this->news->getBySlug($slug);
+		$news = $this->news->find($slug);
+		
+		
+		
         if ($news == null) {
             return Response::view('errors.missing', [], 404);
         }

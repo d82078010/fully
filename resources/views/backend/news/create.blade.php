@@ -40,7 +40,7 @@
         {!! Form::open(array('action' => '\Fully\Http\Controllers\Admin\NewsController@store', 'files'=>true)) !!}
         <!-- Title -->
         <div class="control-group {!! $errors->has('title') ? 'has-error' : '' !!}">
-            <label class="control-label" for="title">Title</label>
+            <label class="control-label" for="title">标题</label>
 
             <div class="controls"> {!! Form::text('title', null, array('class'=>'form-control', 'id' => 'title',
                 'placeholder'=>'Title', 'value'=>Input::old('title'))) !!}
@@ -48,6 +48,17 @@
             </div>
         </div>
         <br>
+		<!-- Summary -->
+        <div class="control-group {!! $errors->has('summary') ? 'has-error' : '' !!}">
+            <label class="control-label" for="title">摘要</label>
+
+            <div class="controls"> {!! Form::textarea('summary', null, array('class'=>'form-control', 'id' => 'summary',
+                'placeholder'=>'summary', 'value'=>Input::old('summary'))) !!}
+                @if ($errors->first('summary')) <span class="help-block">{!! $errors->first('summary') !!}</span> @endif
+            </div>
+        </div>
+        <br>
+		
         <!-- Datetime -->
         <div class="control-group {!! $errors->has('datetime') ? 'has-error' : '' !!}">
             <label class="control-label" for="title">Datetime</label>
@@ -60,13 +71,22 @@
         <br>
         
         <!--Content (*U-editor*) -->
-        <div id="ueditor" class="edui-default">
-   			 @include('UEditor::head')
+	  <div class="control-group {!! $errors->has('content') ? 'has-error' : '' !!}">
+     	<label class="control-label" for="title">Content</label>
+    
+		<div class="controls"> 
+			{!! Form::textarea('content', null, array('class'=>'edui-default', 'id' => 'content','placeholder'=>'Content', 'value'=>Input::old('content'))) !!}
+			@include('UEditor::head')
+			@if($errors->first('content')) 
+				<span class="help-block">{!! $errors->first('content') !!}</span> 
+			@endif
 		</div>
-        @section('script')
+	  </div>
+      <br>
+	  @section('script')
 			<script id="ueditor"></script>
 			<script>
-				    var ue=UE.getEditor("ueditor");
+				    var ue=UE.getEditor("content");
 				    ue.ready(function(){
 				         //因为Laravel有防csrf防伪造攻击的处理所以加上此行
 				         ue.execCommand('serverparam','_token','{{ csrf_token() }}');
@@ -102,7 +122,7 @@
         <br> {!! Form::submit('Create', array('class' => 'btn btn-success')) !!} {!! Form::close() !!}
         <script type="text/javascript">
             window.onload = function () {
-                CKEDITOR.replace('content', {
+                CKEDITOR.replace('*content*', {
                     "filebrowserBrowseUrl": "{!! url('filemanager/show') !!}",
                 });
             };

@@ -16,7 +16,7 @@ class News extends BaseModel implements ModelInterface, SluggableInterface
     use SluggableTrait;
 
     public $table = 'news';
-    public $fillable = ['title', 'content', 'datetime', 'is_published'];
+    public $fillable = ['title', 'content', 'datetime', 'is_published','summary'];	
     protected $appends = ['url'];
 
     protected $sluggable = array(

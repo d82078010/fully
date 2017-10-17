@@ -17,7 +17,8 @@
         "rap2hpoutre/laravel-log-viewer": "^0.5.3",
         "cviebrock/eloquent-sluggable": "^3.1",
         "intervention/image": "^2.3",
-		"stevenyangecho/laravel-u-editor": "~1.4"
+		"stevenyangecho/laravel-u-editor": "~1.4",
+		"jellybool/translug" : "~2.0"
 		
     },
     "require-dev": {

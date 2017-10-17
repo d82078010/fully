@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <h1>News</h1>
+                <h1>新闻资讯</h1>
 
                 <p>Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
             </div>
@@ -37,7 +37,7 @@
             @foreach( $news as $v )
             <div class="row">
                 <div class="col-sm-12">
-                    <a href="{!! URL::route('dashboard.news.show', array('slug'=>$v->slug)) !!}">
+                    <a href="{!! URL::route('dashboard.news.show', array('id'=>$v->id)) !!}">
                         <h4>{!! $v->title !!}</h4>&nbsp;&nbsp;&nbsp;<span datetime="{!! $v->created_at !!}" class="label label-default label-arrow label-arrow-left time"></span>
                     </a>
                     <hr>
@@ -50,11 +50,11 @@
                     @endif
                 </div>
                 <div class="col-sm-8">
-                    <p>{!! mb_substr(strip_tags($v->content),0,500) !!}...</p>
+                    <p>{!! strip_tags($v->summary) !!}...</p>
                 </div>
                 <div style="clear: both"></div>
                 <p>
-                    <a style="float: right" href="{!! URL::route('dashboard.news.show', array('slug'=>$v->slug)) !!}" class="btn btn-xs btn-primary">Read More</a>
+                    <a style="float: right" href="{!! URL::route('dashboard.news.show', array('id'=>$v->id)) !!}" class="btn btn-xs btn-primary">Read More</a>
                 </p>
             </div>
             <hr>
