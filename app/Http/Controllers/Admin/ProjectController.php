@@ -47,7 +47,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('backend.project.create');
+		
+		
+			$options = $this->project->getProjectOptions();
+		
+        return view('backend.project.create',compact('options'));
     }
 
     /**
@@ -90,9 +94,11 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+		$options = $this->project->getProjectOptions();
+		
         $project = $this->project->find($id);
 
-        return view('backend.project.edit', compact('project'));
+        return view('backend.project.edit', compact('project','options'));
     }
 
     /**
@@ -104,6 +110,8 @@ class ProjectController extends Controller
      */
     public function update($id)
     {
+		
+		
         try {
             $this->project->update($id, Input::all());
             Flash::message('Project was successfully updated');

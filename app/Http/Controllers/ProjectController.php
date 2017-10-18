@@ -24,10 +24,28 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+	 
+	public function index()
     {
+		
+		
         $projects = $this->project->all();
-
+	
+        return view('frontend.project.index', compact('projects'));
+    }
+	 
+    public function that($id)
+    {
+		$id = $id ? $id : "first";
+		$rule = array(
+		"first"=>1,
+		"second"=>2,
+		"third"=>3,
+		);
+		
+        $projects = $this->project->all();
+		$projects=$projects->where('category_id',$rule[$id]);
+		//dd($projects);
         return view('frontend.project.index', compact('projects'));
     }
 

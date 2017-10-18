@@ -43,6 +43,8 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $pagiData = $this->article->paginate($request->get('page', 1), $this->perPage, false);
+		
+	
         $articles = Pagination::makeLengthAware($pagiData->items, $pagiData->totalItems, $this->perPage);
 
         $tags = $this->tag->all();

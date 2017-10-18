@@ -30,8 +30,6 @@
     <ul class="portfolio-items col-3">
         @foreach($projects as $project)
         <li class="portfolio-item apps">
-		
-			
             <div class="item-inner">
                @if($project->path)
                 <img src="{!! url($project->path . 'thumb_' . $project->file_name) !!}" alt="">

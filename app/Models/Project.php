@@ -17,7 +17,7 @@ class Project extends Model implements ModelInterface, SluggableInterface
     use SluggableTrait;
 
     public $table = 'projects';
-    protected $fillable = array('title', 'description');
+    protected $fillable = array('title', 'description','category_id');
 
     protected $sluggable = array(
         'build_from' => 'title',

@@ -73,6 +73,22 @@ class ProjectRepository extends RepositoryAbstract implements ProjectInterface, 
         $this->imgDir = $config['modules']['project']['image_dir'];
         $this->project = $project;
     }
+	
+	
+	public function getProjectOptions(){
+		
+
+        $menuOptions = array(
+            '常规' => array(
+                1 => '-整机试验室',
+                2 => '-零部件试验室',
+                3 => '-专项试验室',
+                 ),
+            );
+
+        return $menuOptions;
+		
+	}
 
     /**
      * @return mixed
@@ -81,7 +97,7 @@ class ProjectRepository extends RepositoryAbstract implements ProjectInterface, 
     {
         return $this->project->where('lang', $this->getLang())->get();
     }
-
+	
     /**
      * @param $slug
      *

@@ -26,6 +26,18 @@
     </div>
     <br>
 
+	<!-- categories -->
+	 <div class="control-group {!! $errors->has('options') ? 'has-error' : '' !!}">
+        <label class="control-label" for="title">Options</label>
+
+        <div class="controls">
+            {!! Form::select('category_id', $options, $project->category_id, array('class'=>'form-control', 'id' => 'options', 'value'=>Input::old('options')))  !!}
+            @if ($errors->first('options'))
+            <span class="help-block">{!! $errors->first('options') !!}</span>
+            @endif
+        </div>
+        <br>
+    </div>
 
     <!-- Description -->
     <div class="control-group {!! $errors->has('description') ? 'has-error' : '' !!}">

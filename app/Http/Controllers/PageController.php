@@ -28,7 +28,8 @@ class PageController extends Controller
      */
     public function show($slug)
     {
-        $page = $this->page->getBySlug($slug, true);
+        //$page = $this->page->getBySlug($slug, true);
+		$page = $this->page->find($slug);
 
         if ($page === null) {
             return Response::view('errors.missing', array(), 404);

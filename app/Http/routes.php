@@ -59,8 +59,10 @@ Route::group(array('prefix' => LaravelLocalization::getCurrentLocale(), 'before'
 
     // projects
     Route::get('/project', array('as' => 'dashboard.project', 'uses' => 'ProjectController@index'));
-    Route::get('/project/{slug}', array('as' => 'dashboard.project.show', 'uses' => 'ProjectController@show'));
+    Route::get('/project/t/{id}', array('as' => 'dashboard.project.that', 'uses' => 'ProjectController@that'));
+	Route::get('/project/{slug}', array('as' => 'dashboard.project.show', 'uses' => 'ProjectController@show'));
 
+	
     // contact
     Route::get('/contact', array('as' => 'dashboard.contact', 'uses' => 'FormPostController@getContact'));
 
